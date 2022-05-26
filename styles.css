@@ -1,0 +1,116 @@
+/* * {
+    border: 1px solid red;
+} */
+
+:root {
+    --btn-width: 25px;
+    --equal-btn-width: 50px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 250px;
+    background-color: grey;
+    border: 2px solid black;
+    border-radius: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    padding: 15px 15px;
+}
+
+.calculator {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-weight: 900;
+    margin-top: 0;
+    text-shadow: 1px 1px 2px white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.screens {
+    flex-direction: column;
+    flex: 1 0 auto;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.screen {
+    border: 1px solid black;
+}
+
+.screen.display {
+    background-color: #074a0d;
+    color: white;
+    height:32px;
+    padding: 0 5px;
+    border-bottom-width: 0;
+}
+
+.keypad {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.keypad-nums {
+    flex-wrap: wrap;
+    flex: 1 0 100px;
+}
+
+button {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.keypad-nums button {
+    flex: 1 0 29%;
+    margin: 2px;
+}
+
+.keypad-ops {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60px;
+}
+
+.opBtn {
+    width: var(--btn-width);
+    margin: 2px;
+    background-color: aquamarine;
+}
+
+#equalBtn {
+    width: var(--equal-btn-width);
+    margin: 2px;
+    background-color: #15eb4e;
+}
+
+#equalBtn:hover {
+    background-color: #04da3d;
+}
+
+#equalBtn:active {
+    background-color: red;
+}
+
+
+
