@@ -139,7 +139,7 @@ function collapse(equation, operators) {
         }
     }
     let slice = equation.slice(startIndex, endIndex);
-    let result = arithmetic(slice.join('')); // currently causes stack overflow
+    let result = arithmetic(slice.join(''));
     if (result === DIVIDE_BY_ZERO_MSG) {
         return DIVIDE_BY_ZERO_MSG;
     }
