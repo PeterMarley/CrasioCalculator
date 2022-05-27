@@ -50,11 +50,16 @@ function clickOperator(btn) {
     displayCalc.value = displayCalc.value + btn.textContent;
 }
 
-
+/**
+ * 
+ * @param {Array of 1-character Strings} equation 
+ * @returns {Array of 1-character Strings} equation with bracketed parts solveds
+ */
 function collapseBrackets(equation) {
     // if no brackets, return simple arithmetic on equation
     if (equation.findIndex(element => element === '(') === -1) {
-        return arithmetic(equation.join(''));
+        const result = (solve(equation.join(''))).split('');
+        return result;
     }
 
     // if there are brackets, recursively solve each bracket, then return the simple arithmetic
@@ -62,12 +67,15 @@ function collapseBrackets(equation) {
     while (!parsed) {
         let nestedParen = 0;
         let begin = false;
-        let startIndex, endIndex;
+        let startIndex = null;
+        let endIndex = null;
         let equationLength = equation.length;
         for (let i = 0; i < equationLength; i++) {
             if (equation[i] === '(') {
                 nestedParen++;
-                startIndex = i;
+                if (startIndex === null) {
+                    startIndex = i + 1;
+                }
                 begin = true;
             } else if (equation[i] === ')') {
                 nestedParen--;
@@ -75,8 +83,19 @@ function collapseBrackets(equation) {
             if (nestedParen === 0 && begin) {
                 begin = false;
                 endIndex = i;
-                let collapsed = collapseBrackets(equation.slice(startIndex + 1, endIndex));
-                equation.splice(startIndex, endIndex - startIndex + 1, ...collapsed.toString().split(''));
+                let slice = equation.slice(startIndex, endIndex);
+                let collapsed = collapseBrackets(slice);
+                // here you need to control if equation is an array or a string, i tihnk this is the problem, as commas are appearing 
+                let replace = endIndex - startIndex + 2;
+                if (equation.join('') == "1+2*2^2") {
+                    console.log('hello');
+                }
+                if (slice.find((element) => (element === '(' || element ==='('))) {
+                    equation.splice(startIndex, replace, ...collapsed);
+                } else {
+                    equation.splice(startIndex -1, replace, ...collapsed);
+                }
+                //equation.splice(startIndex -1, replace, ...collapsed);
                 equationLength = equation.length;
                 i = 0;
             }
@@ -155,7 +174,7 @@ function collapse(equation, operators) {
  * This function enforces order of operations on an equation. This means that first arithmetic in parenthesis are solved, then exponents, then
  * multiplication and division from left to right, then addition and subtraction from left to right.
  * @param {String} equation 
- * @returns 
+ * @returns {String} result
  */
 function solve(equation) {
 
@@ -196,7 +215,7 @@ function solve(equation) {
 
     // 2 decimal places
     let dp = parseFloat(equation.join(''));
-    dp = Math.round(dp*100)/100;
+    dp = Math.round(dp * 100) / 100;
 
     return dp.toString();
 }
